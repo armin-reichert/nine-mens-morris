@@ -117,7 +117,7 @@ public class MoveController {
 		if (move.isPresent()) {
 			int from = move.from().get(), to = move.to().get();
 			gameUI.getStoneAt(from).ifPresent(stone -> {
-				float speed = Vector2f.dist(gameUI.getLocation(from), gameUI.getLocation(to))
+				float speed = Vector2f.euclideanDist(gameUI.getLocation(from), gameUI.getLocation(to))
 						/ app().clock.sec(moveTimeSec);
 				Direction dir = getDirection(from, to).get();
 				if (dir == Direction.NORTH) {
