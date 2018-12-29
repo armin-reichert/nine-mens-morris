@@ -26,7 +26,7 @@ import org.junit.Test;
 import de.amr.games.muehle.model.board.Board;
 import de.amr.games.muehle.model.board.Direction;
 
-public class BoardTests {
+public class BoardTest {
 
 	private Board board;
 
