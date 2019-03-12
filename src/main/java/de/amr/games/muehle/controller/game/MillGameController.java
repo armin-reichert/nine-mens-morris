@@ -364,4 +364,8 @@ public class MillGameController implements ViewController {
 		return !whitePlayer.isInteractive() && !blackPlayer.isInteractive()
 				|| Keyboard.keyPressedOnce(KeyEvent.VK_SPACE);
 	}
+	
+	public float getPlacingTimeSeconds() {
+		return placingTimeSeconds;
+	}
 }
