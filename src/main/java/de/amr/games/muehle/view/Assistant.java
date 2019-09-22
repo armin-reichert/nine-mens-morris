@@ -57,10 +57,11 @@ public class Assistant extends SpriteEntity {
 		this.control = control;
 		this.board = control.model.board;
 		this.helpLevel = HelpLevel.OFF;
-		sprites.set("s_alien", Sprite.of(Assets.image("images/alien.png")).scale(100, 100));
+		Sprite alien = Sprite.of(Assets.image("images/alien.png")).scale(100, 100);
+		sprites.set("s_alien", alien);
 		sprites.select("s_alien");
-		tf.setWidth(sprites.current().getWidth());
-		tf.setHeight(sprites.current().getHeight());
+		tf.setWidth(alien.getWidth());
+		tf.setHeight(alien.getHeight());
 	}
 
 	public void setView(MillGameUI view) {
@@ -75,7 +76,8 @@ public class Assistant extends SpriteEntity {
 		helpLevel = level;
 		if (helpLevel == HelpLevel.OFF) {
 			Application.LOGGER.info(Messages.text("assistant_off"));
-		} else {
+		}
+		else {
 			tellYoFine();
 			Application.LOGGER.info(Messages.text("assistant_on"));
 		}
@@ -100,10 +102,14 @@ public class Assistant extends SpriteEntity {
 			if (helpLevel == HelpLevel.HIGH && control.playerInTurn().isInteractive()) {
 				MillGameState state = control.getFsm().getState();
 				if (state == MillGameState.PLACING || state == MillGameState.PLACING_REMOVING) {
-					view.markPositions(g, board.positionsClosingMill(control.playerInTurn().color()), Color.GREEN);
-					view.markPositions(g, board.positionsOpeningTwoMills(control.playerInTurn().color()), Color.YELLOW);
-					view.markPositions(g, board.positionsClosingMill(control.playerNotInTurn().color()), Color.RED);
-				} else if (state == MillGameState.MOVING || state == MillGameState.MOVING_REMOVING) {
+					view.markPositions(g, board.positionsClosingMill(control.playerInTurn().color()),
+							Color.GREEN);
+					view.markPositions(g, board.positionsOpeningTwoMills(control.playerInTurn().color()),
+							Color.YELLOW);
+					view.markPositions(g, board.positionsClosingMill(control.playerNotInTurn().color()),
+							Color.RED);
+				}
+				else if (state == MillGameState.MOVING || state == MillGameState.MOVING_REMOVING) {
 					markPossibleMoveStarts(g, control.playerInTurn().color(), Color.GREEN);
 					markTrappingPosition(g, control.playerInTurn().color(), control.playerNotInTurn().color(),
 							Color.RED);
@@ -114,10 +120,12 @@ public class Assistant extends SpriteEntity {
 
 	private void markPossibleMoveStarts(Graphics2D g, StoneColor stoneColor, Color color) {
 		(control.playerInTurn().canJump() ? board.positions(stoneColor)
-				: board.positionsWithEmptyNeighbor(stoneColor)).forEach(p -> view.markPosition(g, p, color));
+				: board.positionsWithEmptyNeighbor(stoneColor))
+						.forEach(p -> view.markPosition(g, p, color));
 	}
 
-	private void markTrappingPosition(Graphics2D g, StoneColor either, StoneColor other, Color color) {
+	private void markTrappingPosition(Graphics2D g, StoneColor either, StoneColor other,
+			Color color) {
 		if (board.positionsWithEmptyNeighbor(other).count() == 1) {
 			int singleFreePosition = board.positionsWithEmptyNeighbor(other).findFirst().getAsInt();
 			if (neighbors(singleFreePosition).filter(board::hasStoneAt)
