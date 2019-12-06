@@ -20,7 +20,7 @@ import java.util.OptionalInt;
 import de.amr.easy.game.input.Keyboard;
 import de.amr.easy.game.input.Mouse;
 import de.amr.easy.game.view.View;
-import de.amr.easy.game.view.ViewController;
+import de.amr.easy.game.view.VisualController;
 import de.amr.games.muehle.MillGameApp;
 import de.amr.games.muehle.controller.move.MoveController;
 import de.amr.games.muehle.controller.move.MoveState;
@@ -42,7 +42,7 @@ import de.amr.statemachine.StateMachine;
  * 
  * @author Armin Reichert
  */
-public class MillGameController implements ViewController {
+public class MillGameController implements VisualController {
 
 	public final MillGameApp app;
 	public final MillGameModel model;
