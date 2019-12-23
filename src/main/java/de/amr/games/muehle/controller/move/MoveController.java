@@ -21,8 +21,8 @@ import de.amr.games.muehle.model.board.Move;
 import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.MillGameUI;
 import de.amr.games.muehle.view.Stone;
-import de.amr.statemachine.Match;
-import de.amr.statemachine.StateMachine;
+import de.amr.statemachine.core.Match;
+import de.amr.statemachine.core.StateMachine;
 
 /**
  * A finite state machine for controlling the animated movement of stones.

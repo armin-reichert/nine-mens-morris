@@ -34,8 +34,8 @@ import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.Assistant;
 import de.amr.games.muehle.view.MillGameScene;
 import de.amr.games.muehle.view.MillGameUI;
-import de.amr.statemachine.Match;
-import de.amr.statemachine.StateMachine;
+import de.amr.statemachine.core.Match;
+import de.amr.statemachine.core.StateMachine;
 
 /**
  * Controller for the mill game application.
