@@ -15,6 +15,7 @@ import static de.amr.games.muehle.model.board.StoneColor.BLACK;
 import static de.amr.games.muehle.model.board.StoneColor.WHITE;
 
 import java.awt.event.KeyEvent;
+import java.util.Optional;
 import java.util.OptionalInt;
 
 import de.amr.easy.game.input.Keyboard;
@@ -170,8 +171,8 @@ public class MillGameController implements VisualController {
 	}
 
 	@Override
-	public View currentView() {
-		return view;
+	public Optional<View> currentView() {
+		return Optional.ofNullable(view);
 	}
 
 	public void setMoveTimeSeconds(float moveTimeSeconds) {
