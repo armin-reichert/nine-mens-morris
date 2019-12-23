@@ -34,7 +34,7 @@ import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.Assistant;
 import de.amr.games.muehle.view.MillGameScene;
 import de.amr.games.muehle.view.MillGameUI;
-import de.amr.statemachine.core.Match;
+import de.amr.statemachine.core.EventMatchStrategy;
 import de.amr.statemachine.core.StateMachine;
 
 /**
@@ -70,7 +70,7 @@ public class MillGameController implements VisualController {
 
 	private StateMachine<MillGameState, MillGameEvent> buildStateMachine() {
 		//@formatter:off
-		return StateMachine.beginStateMachine(MillGameState.class, MillGameEvent.class, Match.BY_EQUALITY)
+		return StateMachine.beginStateMachine(MillGameState.class, MillGameEvent.class, EventMatchStrategy.BY_EQUALITY)
 
 				.description("MillGameControl")
 				.initialState(STARTING)
