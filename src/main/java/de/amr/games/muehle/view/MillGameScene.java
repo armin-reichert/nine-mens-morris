@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.math.Vector2f;
 import de.amr.easy.game.ui.widgets.TextWidget;
-import de.amr.easy.game.view.Controller;
+import de.amr.easy.game.view.Lifecycle;
 import de.amr.easy.game.view.View;
 import de.amr.games.muehle.MillGameApp;
 import de.amr.games.muehle.controller.game.MillGameController;
@@ -27,7 +27,7 @@ import de.amr.games.muehle.msg.Messages;
  * 
  * @author Armin Reichert
  */
-public class MillGameScene implements View, Controller, MillGameUI {
+public class MillGameScene implements View, Lifecycle, MillGameUI {
 
 	private final MillGameApp app;
 	private final MillGameController controller;
@@ -79,7 +79,7 @@ public class MillGameScene implements View, Controller, MillGameUI {
 		controller.assistant.tf.setY(getHeight() / 2 - 100);
 	}
 
-	public Controller getController() {
+	public Lifecycle getController() {
 		return controller;
 	}
 
