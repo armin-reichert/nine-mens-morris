@@ -10,8 +10,8 @@ import java.awt.Graphics2D;
 import java.util.stream.IntStream;
 
 import de.amr.easy.game.Application;
+import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.input.Mouse;
-import de.amr.easy.game.view.Lifecycle;
 import de.amr.easy.game.view.View;
 import de.amr.games.muehle.model.board.Board;
 import de.amr.games.muehle.view.BoardUI;

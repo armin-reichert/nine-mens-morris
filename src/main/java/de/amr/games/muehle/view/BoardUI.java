@@ -17,9 +17,9 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Stream;
 
+import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.math.Vector2f;
-import de.amr.easy.game.view.Lifecycle;
 import de.amr.easy.game.view.View;
 import de.amr.games.muehle.model.board.Board;
 import de.amr.games.muehle.model.board.Move;
