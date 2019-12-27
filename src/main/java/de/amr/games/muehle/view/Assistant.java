@@ -5,14 +5,15 @@ import static de.amr.games.muehle.model.board.Board.positions;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import de.amr.easy.game.Application;
 import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.assets.Sound;
+import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.entity.Entity;
-import de.amr.easy.game.ui.sprites.Sprite;
 import de.amr.games.muehle.controller.game.MillGameController;
 import de.amr.games.muehle.controller.game.MillGameState;
 import de.amr.games.muehle.controller.player.Player;
@@ -23,7 +24,7 @@ import de.amr.games.muehle.msg.Messages;
 /**
  * An assistant providing visual and acoustic hints to the assisted player.
  */
-public class Assistant extends Entity {
+public class Assistant extends Entity implements Lifecycle {
 
 	public enum HelpLevel {
 		OFF, NORMAL, HIGH
@@ -48,6 +49,7 @@ public class Assistant extends Entity {
 		private final String assetsPath;
 	}
 
+	public final BufferedImage alien;
 	private final Board board;
 	private final MillGameController control;
 	private MillGameUI view;
@@ -57,9 +59,8 @@ public class Assistant extends Entity {
 		this.control = control;
 		this.board = control.model.board;
 		this.helpLevel = HelpLevel.OFF;
-		Sprite alien = Sprite.of(Assets.image("images/alien.png")).scale(100, 100);
-		sprites.set("s_alien", alien);
-		sprites.select("s_alien");
+		alien = (BufferedImage) Assets.image("images/alien.png").getScaledInstance(100, 100,
+				BufferedImage.SCALE_DEFAULT);
 		tf.setWidth(alien.getWidth());
 		tf.setHeight(alien.getHeight());
 	}
@@ -89,6 +90,10 @@ public class Assistant extends Entity {
 		Stream.of(SoundID.values()).forEach(SoundID::sound);
 	}
 
+	@Override
+	public void update() {
+	}
+
 	public void toggle() {
 		setHelpLevel(helpLevel == HelpLevel.OFF ? HelpLevel.NORMAL : HelpLevel.OFF);
 	}
@@ -98,16 +103,13 @@ public class Assistant extends Entity {
 		// draw assistant only if any sound is running
 		if (helpLevel != HelpLevel.OFF
 				&& Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(Sound::isRunning)) {
-			super.draw(g);
+			g.drawImage(alien, (int) tf.getX(), (int) tf.getY(), null);
 			if (helpLevel == HelpLevel.HIGH && control.playerInTurn().isInteractive()) {
 				MillGameState state = control.getFsm().getState();
 				if (state == MillGameState.PLACING || state == MillGameState.PLACING_REMOVING) {
-					view.markPositions(g, board.positionsClosingMill(control.playerInTurn().color()),
-							Color.GREEN);
-					view.markPositions(g, board.positionsOpeningTwoMills(control.playerInTurn().color()),
-							Color.YELLOW);
-					view.markPositions(g, board.positionsClosingMill(control.playerNotInTurn().color()),
-							Color.RED);
+					view.markPositions(g, board.positionsClosingMill(control.playerInTurn().color()), Color.GREEN);
+					view.markPositions(g, board.positionsOpeningTwoMills(control.playerInTurn().color()), Color.YELLOW);
+					view.markPositions(g, board.positionsClosingMill(control.playerNotInTurn().color()), Color.RED);
 				}
 				else if (state == MillGameState.MOVING || state == MillGameState.MOVING_REMOVING) {
 					markPossibleMoveStarts(g, control.playerInTurn().color(), Color.GREEN);
@@ -120,12 +122,10 @@ public class Assistant extends Entity {
 
 	private void markPossibleMoveStarts(Graphics2D g, StoneColor stoneColor, Color color) {
 		(control.playerInTurn().canJump() ? board.positions(stoneColor)
-				: board.positionsWithEmptyNeighbor(stoneColor))
-						.forEach(p -> view.markPosition(g, p, color));
+				: board.positionsWithEmptyNeighbor(stoneColor)).forEach(p -> view.markPosition(g, p, color));
 	}
 
-	private void markTrappingPosition(Graphics2D g, StoneColor either, StoneColor other,
-			Color color) {
+	private void markTrappingPosition(Graphics2D g, StoneColor either, StoneColor other, Color color) {
 		if (board.positionsWithEmptyNeighbor(other).count() == 1) {
 			int singleFreePosition = board.positionsWithEmptyNeighbor(other).findFirst().getAsInt();
 			if (neighbors(singleFreePosition).filter(board::hasStoneAt)

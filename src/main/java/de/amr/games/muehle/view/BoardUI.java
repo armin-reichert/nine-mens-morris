@@ -17,7 +17,6 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Stream;
 
-import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.math.Vector2f;
 import de.amr.easy.game.view.View;
@@ -30,12 +29,10 @@ import de.amr.games.muehle.model.board.StoneColor;
  * 
  * @author Armin Reichert
  */
-public class BoardUI extends Entity implements View, Lifecycle {
+public class BoardUI extends Entity implements View {
 
-	private static final int[] GRID_X = { 0, 3, 6, 1, 3, 5, 2, 3, 4, 0, 1, 2, 4, 5, 6, 2, 3, 4, 1, 3, 5, 0, 3,
-			6 };
-	private static final int[] GRID_Y = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6,
-			6 };
+	static final int[] GRID_X = { 0, 3, 6, 1, 3, 5, 2, 3, 4, 0, 1, 2, 4, 5, 6, 2, 3, 4, 1, 3, 5, 0, 3, 6 };
+	static final int[] GRID_Y = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6 };
 
 	private final Board board;
 	private final Stone[] stones;
@@ -128,12 +125,14 @@ public class BoardUI extends Entity implements View, Lifecycle {
 		y -= tf.getY();
 		if (x < 0) {
 			x = 0;
-		} else if (x > size) {
+		}
+		else if (x > size) {
 			x = size;
 		}
 		if (y < 0) {
 			y = 0;
-		} else if (y > size) {
+		}
+		else if (y > size) {
 			y = size;
 		}
 		return findBoardPosition(x, y, gridSize / 2);
