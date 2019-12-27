@@ -5,6 +5,7 @@ import static de.amr.games.muehle.model.board.Board.positions;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -49,7 +50,7 @@ public class Assistant extends Entity implements Lifecycle {
 		private final String assetsPath;
 	}
 
-	public final BufferedImage alien;
+	public final Image alien;
 	private final Board board;
 	private final MillGameController control;
 	private MillGameUI view;
@@ -59,10 +60,9 @@ public class Assistant extends Entity implements Lifecycle {
 		this.control = control;
 		this.board = control.model.board;
 		this.helpLevel = HelpLevel.OFF;
-		alien = (BufferedImage) Assets.image("images/alien.png").getScaledInstance(100, 100,
-				BufferedImage.SCALE_DEFAULT);
-		tf.setWidth(alien.getWidth());
-		tf.setHeight(alien.getHeight());
+		alien = Assets.image("images/alien.png").getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
+		tf.setWidth(alien.getWidth(null));
+		tf.setHeight(alien.getHeight(null));
 	}
 
 	public void setView(MillGameUI view) {
