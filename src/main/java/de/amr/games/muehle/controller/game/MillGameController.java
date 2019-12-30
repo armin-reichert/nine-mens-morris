@@ -1,7 +1,6 @@
 package de.amr.games.muehle.controller.game;
 
 import static de.amr.easy.game.Application.LOGGER;
-import static de.amr.easy.game.Application.app;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_PLACED;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_PLACED_IN_MILL;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_REMOVED;
@@ -254,7 +253,7 @@ public class MillGameController implements VisualController {
 	private void turnMovingTo(Player player) {
 		turn = player;
 		moveControl = new MoveController(turn, view, moveTimeSeconds);
-		moveControl.getFsm().traceTo(LOGGER, app().clock::getFrequency);
+		moveControl.getFsm().setLogger(LOGGER);
 		moveControl.getFsm().init();
 		view.showMessage("must_move", turn.name());
 	}
