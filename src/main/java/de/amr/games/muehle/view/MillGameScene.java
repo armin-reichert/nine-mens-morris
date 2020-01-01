@@ -10,9 +10,9 @@ import java.util.stream.IntStream;
 
 import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.controller.Lifecycle;
+import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.math.Vector2f;
 import de.amr.easy.game.ui.widgets.TextWidget;
-import de.amr.easy.game.view.View;
 import de.amr.games.muehle.MillGameApp;
 import de.amr.games.muehle.controller.game.MillGameController;
 import de.amr.games.muehle.controller.game.MillGameState;
@@ -27,7 +27,7 @@ import de.amr.games.muehle.msg.Messages;
  * 
  * @author Armin Reichert
  */
-public class MillGameScene implements View, Lifecycle, MillGameUI {
+public class MillGameScene extends Entity implements Lifecycle, MillGameUI {
 
 	private final MillGameApp app;
 	private final MillGameController controller;
@@ -156,8 +156,7 @@ public class MillGameScene implements View, Lifecycle, MillGameUI {
 				}
 			});
 			drawStonesLeft(g, controller.whitePlayer(), 9 - model.whiteStonesPlaced, 40, getHeight() - 30);
-			drawStonesLeft(g, controller.blackPlayer(), 9 - model.blackStonesPlaced, getWidth() - 100,
-					getHeight() - 30);
+			drawStonesLeft(g, controller.blackPlayer(), 9 - model.blackStonesPlaced, getWidth() - 100, getHeight() - 30);
 		}
 		if ((state == MillGameState.MOVING_REMOVING || state == MillGameState.PLACING_REMOVING)
 				&& controller.playerInTurn().isInteractive()) {

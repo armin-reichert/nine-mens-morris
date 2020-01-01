@@ -11,13 +11,13 @@ import java.util.stream.IntStream;
 
 import de.amr.easy.game.Application;
 import de.amr.easy.game.controller.Lifecycle;
+import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.input.Mouse;
-import de.amr.easy.game.view.View;
 import de.amr.games.muehle.model.board.Board;
 import de.amr.games.muehle.view.BoardUI;
 import de.amr.games.muehle.view.MillGameUI;
 
-public class TestScene implements View, Lifecycle {
+public class TestScene extends Entity implements Lifecycle {
 
 	private final MillTestApp app;
 	private final Board board;
@@ -74,18 +74,12 @@ public class TestScene implements View, Lifecycle {
 	}
 
 	private void printBoardInfo() {
-		Application.LOGGER
-				.info("Positions opening two white mills: " + toCSV(board.positionsOpeningTwoMills(WHITE)));
-		Application.LOGGER
-				.info("Positions opening two black mills: " + toCSV(board.positionsOpeningTwoMills(BLACK)));
-		Application.LOGGER
-				.info("Positions opening one white mill: " + toCSV(board.positionsOpeningMill(WHITE)));
-		Application.LOGGER
-				.info("Positions opening one black mill: " + toCSV(board.positionsOpeningMill(BLACK)));
-		Application.LOGGER
-				.info("Positions closing white mill: " + toCSV(board.positionsClosingMill(WHITE)));
-		Application.LOGGER
-				.info("Positions closing black mill: " + toCSV(board.positionsClosingMill(BLACK)));
+		Application.LOGGER.info("Positions opening two white mills: " + toCSV(board.positionsOpeningTwoMills(WHITE)));
+		Application.LOGGER.info("Positions opening two black mills: " + toCSV(board.positionsOpeningTwoMills(BLACK)));
+		Application.LOGGER.info("Positions opening one white mill: " + toCSV(board.positionsOpeningMill(WHITE)));
+		Application.LOGGER.info("Positions opening one black mill: " + toCSV(board.positionsOpeningMill(BLACK)));
+		Application.LOGGER.info("Positions closing white mill: " + toCSV(board.positionsClosingMill(WHITE)));
+		Application.LOGGER.info("Positions closing black mill: " + toCSV(board.positionsClosingMill(BLACK)));
 		Application.LOGGER.info("Positions from where can close white mill: "
 				+ toCSV(positions().filter(p -> board.canCloseMillMovingFrom(p, WHITE))));
 		Application.LOGGER.info("Positions from where can close black mill: "
