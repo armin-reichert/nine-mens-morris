@@ -2,7 +2,7 @@ package de.amr.games.muehle.test;
 
 import java.util.Locale;
 
-import de.amr.easy.game.Application;
+import de.amr.easy.game.GenericApplication;
 import de.amr.games.muehle.msg.Messages;
 
 /**
@@ -10,7 +10,7 @@ import de.amr.games.muehle.msg.Messages;
  * 
  * @author Armin Reichert & Peter und Anna Schillo
  */
-public class MillTestApp extends Application {
+public class MillTestApp extends GenericApplication {
 
 	public static void main(String[] args) {
 		Locale locale = (args.length > 0) ? new Locale(args[0]) : Locale.getDefault();
