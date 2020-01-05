@@ -47,11 +47,11 @@ public class MillGameScene extends Entity implements Lifecycle, MillGameUI {
 	}
 
 	public int getWidth() {
-		return app.settings.width;
+		return app.settings().width;
 	}
 
 	public int getHeight() {
-		return app.settings.height;
+		return app.settings().height;
 	}
 
 	@Override

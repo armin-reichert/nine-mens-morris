@@ -20,11 +20,11 @@ public class MillGameApp extends GenericApplication {
 	}
 
 	public MillGameApp() {
-		settings.title = Messages.text("title");
-		settings.width = 800;
-		settings.height = 800;
-		settings.fullScreenMode = null;
-		clock.setFrequency(25);
+		settings().title = Messages.text("title");
+		settings().width = 800;
+		settings().height = 800;
+		settings().fullScreenMode = null;
+		clock().setFrequency(25);
 	}
 
 	@Override

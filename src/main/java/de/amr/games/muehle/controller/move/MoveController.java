@@ -118,7 +118,7 @@ public class MoveController {
 			int from = move.from().get(), to = move.to().get();
 			gameUI.getStoneAt(from).ifPresent(stone -> {
 				float speed = Vector2f.euclideanDist(gameUI.getLocation(from), gameUI.getLocation(to))
-						/ app().clock.sec(moveTimeSec);
+						/ app().clock().sec(moveTimeSec);
 				Direction dir = getDirection(from, to).get();
 				if (dir == Direction.NORTH) {
 					stone.tf.setVelocity(0, -speed);

@@ -19,11 +19,11 @@ public class MillTestApp extends GenericApplication {
 	}
 
 	public MillTestApp() {
-		settings.title = "Mill Test Application";
-		settings.width = 800;
-		settings.height = 800;
-		settings.fullScreenMode = null;
-		clock.setFrequency(25);
+		settings().title = "Mill Test Application";
+		settings().width = 800;
+		settings().height = 800;
+		settings().fullScreenMode = null;
+		clock().setFrequency(25);
 	}
 
 	@Override
