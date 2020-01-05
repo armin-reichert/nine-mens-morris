@@ -2,7 +2,7 @@ package de.amr.games.muehle;
 
 import java.util.Locale;
 
-import de.amr.easy.game.GenericApplication;
+import de.amr.easy.game.Application;
 import de.amr.games.muehle.controller.game.MillGameController;
 import de.amr.games.muehle.model.MillGameModel;
 import de.amr.games.muehle.msg.Messages;
@@ -12,7 +12,7 @@ import de.amr.games.muehle.msg.Messages;
  * 
  * @author Armin Reichert, Peter und Anna Schillo
  */
-public class MillGameApp extends GenericApplication {
+public class MillGameApp extends Application {
 
 	public static void main(String... args) {
 		Messages.load(args.length > 0 ? new Locale(args[0]) : Locale.getDefault());
