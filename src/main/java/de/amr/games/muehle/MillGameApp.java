@@ -3,6 +3,7 @@ package de.amr.games.muehle;
 import java.util.Locale;
 
 import de.amr.easy.game.Application;
+import de.amr.easy.game.config.AppSettings;
 import de.amr.games.muehle.controller.game.MillGameController;
 import de.amr.games.muehle.model.MillGameModel;
 import de.amr.games.muehle.msg.Messages;
@@ -16,25 +17,25 @@ public class MillGameApp extends Application {
 
 	public static void main(String... args) {
 		Messages.load(args.length > 0 ? new Locale(args[0]) : Locale.getDefault());
-		launch(new MillGameApp(), args);
+		launch(MillGameApp.class, args);
 	}
 
-	public MillGameApp() {
-		settings().title = Messages.text("title");
-		settings().width = 800;
-		settings().height = 800;
-		settings().fullScreenMode = null;
-		clock().setFrequency(25);
+	@Override
+	protected void configure(AppSettings settings) {
+		settings.title = Messages.text("title");
+		settings.width = 800;
+		settings.height = 800;
+		settings.fullScreenMode = null;
 	}
 
 	@Override
 	public void init() {
 		MillGameModel model = new MillGameModel();
-
 		MillGameController controller = new MillGameController(this, model);
 		controller.setMoveTimeSeconds(0.75f);
 		controller.setPlacingTimeSeconds(1.5f);
 		controller.getFsm().setLogger(LOGGER);
 		setController(controller);
+		clock().setFrequency(25);
 	}
 }
