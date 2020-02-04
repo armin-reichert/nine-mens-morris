@@ -30,6 +30,6 @@ public class MillTestApp extends Application {
 	@Override
 	public void init() {
 		setController(new TestScene(this));
-		clock().setFrequency(25);
+		clock().setTargetFramerate(25);
 	}
 }
