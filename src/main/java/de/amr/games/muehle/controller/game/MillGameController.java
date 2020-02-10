@@ -34,7 +34,7 @@ import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.Assistant;
 import de.amr.games.muehle.view.MillGameScene;
 import de.amr.games.muehle.view.MillGameUI;
-import de.amr.statemachine.core.EventMatchStrategy;
+import de.amr.statemachine.api.EventMatchStrategy;
 import de.amr.statemachine.core.StateMachine;
 
 /**

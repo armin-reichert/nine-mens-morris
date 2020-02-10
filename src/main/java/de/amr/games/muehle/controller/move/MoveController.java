@@ -21,7 +21,7 @@ import de.amr.games.muehle.model.board.Move;
 import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.MillGameUI;
 import de.amr.games.muehle.view.Stone;
-import de.amr.statemachine.core.EventMatchStrategy;
+import de.amr.statemachine.api.EventMatchStrategy;
 import de.amr.statemachine.core.StateMachine;
 
 /**
