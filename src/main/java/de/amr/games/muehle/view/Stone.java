@@ -37,8 +37,8 @@ public class Stone extends Entity implements View {
 	public Stone(StoneColor color, int radius) {
 		this.color = color;
 		this.radius = radius;
-		tf.setWidth(2 * radius);
-		tf.setHeight(2 * radius);
+		tf.width =(2 * radius);
+		tf.height =(2 * radius);
 	}
 
 	public void setColor(StoneColor color) {
@@ -59,9 +59,9 @@ public class Stone extends Entity implements View {
 
 	@Override
 	public void draw(Graphics2D g) {
-		int size = tf.getHeight();
+		int size = tf.height;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(tf.getX() - radius, tf.getY() - radius);
+		g.translate(tf.x - radius, tf.y - radius);
 		g.setColor(FILL.get(color));
 		g.fillOval(0, 0, size, size);
 		g.setColor(EDGE.get(color));
@@ -70,6 +70,6 @@ public class Stone extends Entity implements View {
 			int offset = (int) ((size - dia) / 2f);
 			g.drawOval(offset, offset, dia.intValue(), dia.intValue());
 		});
-		g.translate(-tf.getX() + radius, -tf.getY() + radius);
+		g.translate(-tf.x + radius, -tf.y + radius);
 	}
 }

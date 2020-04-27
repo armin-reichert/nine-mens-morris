@@ -59,8 +59,8 @@ public class Assistant extends Entity implements Lifecycle, View {
 		this.board = control.model.board;
 		this.helpLevel = HelpLevel.OFF;
 		alien = Assets.image("images/alien.png").getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
-		tf.setWidth(alien.getWidth(null));
-		tf.setHeight(alien.getHeight(null));
+		tf.width =(alien.getWidth(null));
+		tf.height =(alien.getHeight(null));
 	}
 
 	public void setView(MillGameUI view) {
@@ -99,7 +99,7 @@ public class Assistant extends Entity implements Lifecycle, View {
 	public void draw(Graphics2D g) {
 		// draw assistant only if any sound is running
 		if (helpLevel != HelpLevel.OFF && Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(Sound::isRunning)) {
-			g.drawImage(alien, (int) tf.getX(), (int) tf.getY(), null);
+			g.drawImage(alien, (int) tf.x, (int) tf.y, null);
 			if (helpLevel == HelpLevel.HIGH && control.playerInTurn().isInteractive()) {
 				MillGameState state = control.getFsm().getState();
 				if (state == MillGameState.PLACING || state == MillGameState.PLACING_REMOVING) {

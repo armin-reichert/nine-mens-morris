@@ -149,7 +149,7 @@ public class MoveController {
 			if (optStone.isPresent()) {
 				Stone stone = optStone.get();
 				float speed = stone.tf.getVelocity().length();
-				Ellipse2D stoneSpot = new Ellipse2D.Float(stone.tf.getX() - speed, stone.tf.getY() - speed, 2 * speed,
+				Ellipse2D stoneSpot = new Ellipse2D.Float(stone.tf.x - speed, stone.tf.y - speed, 2 * speed,
 						2 * speed);
 				Vector2f toCenter = gameUI.getLocation(to);
 				return stoneSpot.contains(new Point2D.Float(toCenter.x, toCenter.y));

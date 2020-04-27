@@ -65,7 +65,7 @@ public class MillGameScene implements Lifecycle, MillGameUI {
 		boardUI.setBgColor(BOARD_COLOR);
 		boardUI.setLineColor(LINE_COLOR);
 		boardUI.tf.centerX(getWidth());
-		boardUI.tf.setY(50);
+		boardUI.tf.y=(50);
 
 		stoneTemplate = new Stone(StoneColor.WHITE, boardUI.getStoneRadius());
 		stonesCounterFont = new Font(Font.MONOSPACED, Font.BOLD, 2 * boardUI.getStoneRadius());
@@ -75,7 +75,7 @@ public class MillGameScene implements Lifecycle, MillGameUI {
 		messageArea.tf.setPosition(0, getHeight() - 90);
 
 		controller.assistant.tf.centerX(getWidth());
-		controller.assistant.tf.setY(getHeight() / 2 - 100);
+		controller.assistant.tf.y=(getHeight() / 2 - 100);
 	}
 
 	public Lifecycle getController() {

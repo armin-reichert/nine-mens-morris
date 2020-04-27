@@ -54,8 +54,8 @@ public class BoardUI extends Entity implements View {
 
 	public void setSize(int size) {
 		this.size = size;
-		tf.setWidth(size);
-		tf.setHeight(size);
+		tf.width =(size);
+		tf.height =(size);
 		this.gridSize = size / 6;
 		this.posRadius = size / 60;
 		positions().forEach(p -> center[p] = Vector2f.smul(gridSize, Vector2f.of(GRID_X[p], GRID_Y[p])));
@@ -121,8 +121,8 @@ public class BoardUI extends Entity implements View {
 	}
 
 	public OptionalInt findBoardPosition(float x, float y) {
-		x -= tf.getX();
-		y -= tf.getY();
+		x -= tf.x;
+		y -= tf.y;
 		if (x < 0) {
 			x = 0;
 		}
@@ -156,7 +156,7 @@ public class BoardUI extends Entity implements View {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.translate(tf.getX(), tf.getY());
+		g.translate(tf.x, tf.y);
 		// Background
 		g.setColor(bgColor);
 		g.fillRect(0, 0, size, size);
@@ -183,30 +183,30 @@ public class BoardUI extends Entity implements View {
 		});
 		// Stones
 		Stream.of(stones).filter(Objects::nonNull).forEach(stone -> stone.draw(g));
-		g.translate(-tf.getX(), -tf.getY());
+		g.translate(-tf.x, -tf.y);
 	}
 
 	public void markPosition(Graphics2D g, int p, Color color) {
-		g.translate(tf.getX(), tf.getY());
+		g.translate(tf.x, tf.y);
 		g.setColor(color);
 		aa_on(g);
 		g.fillOval(round(center[p].x) - posRadius / 2, round(center[p].y) - posRadius / 2, posRadius, posRadius);
 		aa_off(g);
-		g.translate(-tf.getX(), -tf.getY());
+		g.translate(-tf.x, -tf.y);
 	}
 
 	public void markRemovableStones(Graphics2D g, StoneColor stoneColor) {
 		boolean allStonesInMills = board.allStonesInMills(stoneColor);
 		board.positions(stoneColor).filter(p -> allStonesInMills || !board.inMill(p, stoneColor)).forEach(p -> {
 			stoneAt(p).ifPresent(stone -> {
-				float offsetX = tf.getX() + stone.tf.getX() - stone.tf.getWidth() / 2;
-				float offsetY = tf.getY() + stone.tf.getY() - stone.tf.getHeight() / 2;
+				float offsetX = tf.x + stone.tf.x - stone.tf.width / 2;
+				float offsetY = tf.y + stone.tf.y - stone.tf.height / 2;
 				// draw red cross
 				g.translate(offsetX, offsetY);
 				g.setColor(Color.RED);
 				aa_on(g);
-				g.drawLine(0, 0, stone.tf.getWidth(), stone.tf.getHeight());
-				g.drawLine(0, stone.tf.getHeight(), stone.tf.getWidth(), 0);
+				g.drawLine(0, 0, stone.tf.width, stone.tf.height);
+				g.drawLine(0, stone.tf.height, stone.tf.width, 0);
 				aa_off(g);
 				g.translate(-offsetX, -offsetY);
 			});
