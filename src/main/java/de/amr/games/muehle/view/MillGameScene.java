@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 
 import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.controller.Lifecycle;
-import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.math.Vector2f;
 import de.amr.easy.game.ui.widgets.TextWidget;
 import de.amr.games.muehle.MillGameApp;
@@ -27,7 +26,7 @@ import de.amr.games.muehle.msg.Messages;
  * 
  * @author Armin Reichert
  */
-public class MillGameScene extends Entity implements Lifecycle, MillGameUI {
+public class MillGameScene implements Lifecycle, MillGameUI {
 
 	private final MillGameApp app;
 	private final MillGameController controller;
