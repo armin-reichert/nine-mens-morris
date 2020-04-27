@@ -11,13 +11,13 @@ import java.util.stream.IntStream;
 
 import de.amr.easy.game.Application;
 import de.amr.easy.game.controller.Lifecycle;
-import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.input.Mouse;
+import de.amr.easy.game.view.View;
 import de.amr.games.muehle.model.board.Board;
 import de.amr.games.muehle.view.BoardUI;
 import de.amr.games.muehle.view.MillGameUI;
 
-public class TestScene extends Entity implements Lifecycle {
+public class TestScene implements Lifecycle, View {
 
 	private final MillTestApp app;
 	private final Board board;

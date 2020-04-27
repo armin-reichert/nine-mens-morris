@@ -15,6 +15,7 @@ import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.assets.Sound;
 import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.entity.Entity;
+import de.amr.easy.game.view.View;
 import de.amr.games.muehle.controller.game.MillGameController;
 import de.amr.games.muehle.controller.game.MillGameState;
 import de.amr.games.muehle.controller.player.Player;
@@ -25,7 +26,7 @@ import de.amr.games.muehle.msg.Messages;
 /**
  * An assistant providing visual and acoustic hints to the assisted player.
  */
-public class Assistant extends Entity implements Lifecycle {
+public class Assistant extends Entity implements Lifecycle, View {
 
 	public enum HelpLevel {
 		OFF, NORMAL, HIGH
@@ -33,11 +34,8 @@ public class Assistant extends Entity implements Lifecycle {
 
 	/** Enumeration type for sound IDs */
 	private enum SoundID {
-		CAN_CLOSE_MILL("can_close_mill"),
-		CAN_OPPONENT_CLOSE_MILL("can_opponent_close_mill"),
-		CAN_OPEN_TWO_MILLS("can_open_two_mills"),
-		YO_FINE("yo_fine"),
-		WIN("win");
+		CAN_CLOSE_MILL("can_close_mill"), CAN_OPPONENT_CLOSE_MILL("can_opponent_close_mill"),
+		CAN_OPEN_TWO_MILLS("can_open_two_mills"), YO_FINE("yo_fine"), WIN("win");
 
 		private SoundID(String baseName) {
 			assetsPath = "sfx/" + baseName + ".mp3";
@@ -77,8 +75,7 @@ public class Assistant extends Entity implements Lifecycle {
 		helpLevel = level;
 		if (helpLevel == HelpLevel.OFF) {
 			Application.LOGGER.info(Messages.text("assistant_off"));
-		}
-		else {
+		} else {
 			tellYoFine();
 			Application.LOGGER.info(Messages.text("assistant_on"));
 		}
@@ -101,8 +98,7 @@ public class Assistant extends Entity implements Lifecycle {
 	@Override
 	public void draw(Graphics2D g) {
 		// draw assistant only if any sound is running
-		if (helpLevel != HelpLevel.OFF
-				&& Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(Sound::isRunning)) {
+		if (helpLevel != HelpLevel.OFF && Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(Sound::isRunning)) {
 			g.drawImage(alien, (int) tf.getX(), (int) tf.getY(), null);
 			if (helpLevel == HelpLevel.HIGH && control.playerInTurn().isInteractive()) {
 				MillGameState state = control.getFsm().getState();
@@ -110,26 +106,23 @@ public class Assistant extends Entity implements Lifecycle {
 					view.markPositions(g, board.positionsClosingMill(control.playerInTurn().color()), Color.GREEN);
 					view.markPositions(g, board.positionsOpeningTwoMills(control.playerInTurn().color()), Color.YELLOW);
 					view.markPositions(g, board.positionsClosingMill(control.playerNotInTurn().color()), Color.RED);
-				}
-				else if (state == MillGameState.MOVING || state == MillGameState.MOVING_REMOVING) {
+				} else if (state == MillGameState.MOVING || state == MillGameState.MOVING_REMOVING) {
 					markPossibleMoveStarts(g, control.playerInTurn().color(), Color.GREEN);
-					markTrappingPosition(g, control.playerInTurn().color(), control.playerNotInTurn().color(),
-							Color.RED);
+					markTrappingPosition(g, control.playerInTurn().color(), control.playerNotInTurn().color(), Color.RED);
 				}
 			}
 		}
 	}
 
 	private void markPossibleMoveStarts(Graphics2D g, StoneColor stoneColor, Color color) {
-		(control.playerInTurn().canJump() ? board.positions(stoneColor)
-				: board.positionsWithEmptyNeighbor(stoneColor)).forEach(p -> view.markPosition(g, p, color));
+		(control.playerInTurn().canJump() ? board.positions(stoneColor) : board.positionsWithEmptyNeighbor(stoneColor))
+				.forEach(p -> view.markPosition(g, p, color));
 	}
 
 	private void markTrappingPosition(Graphics2D g, StoneColor either, StoneColor other, Color color) {
 		if (board.positionsWithEmptyNeighbor(other).count() == 1) {
 			int singleFreePosition = board.positionsWithEmptyNeighbor(other).findFirst().getAsInt();
-			if (neighbors(singleFreePosition).filter(board::hasStoneAt)
-					.anyMatch(p -> board.getStoneAt(p).get() == either)) {
+			if (neighbors(singleFreePosition).filter(board::hasStoneAt).anyMatch(p -> board.getStoneAt(p).get() == either)) {
 				view.markPosition(g, singleFreePosition, color);
 			}
 		}
