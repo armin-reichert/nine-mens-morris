@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.amr.games.muehle</groupId>
 	<artifactId>NineMensMorris</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>NineMensMorris</name>
 	<description>Nine mens morris game (Mühle)</description>
 	<build>
@@ -39,12 +39,12 @@
 		<dependency>
 			<groupId>de.amr.easy.game</groupId>
 			<artifactId>EasyGame</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.amr.statemachine</groupId>
 			<artifactId>StateMachine</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
