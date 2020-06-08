@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import de.amr.easy.game.Application;
 import de.amr.easy.game.assets.Assets;
-import de.amr.easy.game.assets.Sound;
+import de.amr.easy.game.assets.SoundClip;
 import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.entity.Entity;
 import de.amr.easy.game.view.View;
@@ -41,7 +41,7 @@ public class Assistant extends Entity implements Lifecycle, View {
 			assetsPath = "sfx/" + baseName + ".mp3";
 		}
 
-		public Sound sound() {
+		public SoundClip sound() {
 			return Assets.sound(assetsPath);
 		}
 
@@ -98,7 +98,7 @@ public class Assistant extends Entity implements Lifecycle, View {
 	@Override
 	public void draw(Graphics2D g) {
 		// draw assistant only if any sound is running
-		if (helpLevel != HelpLevel.OFF && Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(Sound::isRunning)) {
+		if (helpLevel != HelpLevel.OFF && Stream.of(SoundID.values()).map(SoundID::sound).anyMatch(SoundClip::isRunning)) {
 			g.drawImage(alien, (int) tf.x, (int) tf.y, null);
 			if (helpLevel == HelpLevel.HIGH && control.playerInTurn().isInteractive()) {
 				MillGameState state = control.getFsm().getState();
