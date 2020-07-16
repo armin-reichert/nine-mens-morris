@@ -21,7 +21,7 @@ import de.amr.games.muehle.model.board.Move;
 import de.amr.games.muehle.msg.Messages;
 import de.amr.games.muehle.view.MillGameUI;
 import de.amr.games.muehle.view.Stone;
-import de.amr.statemachine.api.EventMatchStrategy;
+import de.amr.statemachine.api.TransitionMatchStrategy;
 import de.amr.statemachine.core.StateMachine;
 
 /**
@@ -51,7 +51,7 @@ public class MoveController {
 
 	private StateMachine<MoveState, MoveEvent> buildStateMachine() {
 		//@formatter:off
-		return StateMachine.beginStateMachine(MoveState.class, MoveEvent.class, EventMatchStrategy.BY_EQUALITY)
+		return StateMachine.beginStateMachine(MoveState.class, MoveEvent.class, TransitionMatchStrategy.BY_VALUE)
 				.description("Move Control")
 				.initialState(READING_MOVE)
 				
