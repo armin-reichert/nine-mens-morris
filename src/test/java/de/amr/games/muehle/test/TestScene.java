@@ -45,7 +45,7 @@ public class TestScene implements Lifecycle, View {
 		boardUI.setBgColor(MillGameUI.BOARD_COLOR);
 		boardUI.setLineColor(MillGameUI.LINE_COLOR);
 		boardUI.showPositionNumbers();
-		boardUI.tf.center(getWidth(), getHeight());
+		boardUI.tf.centerBoth(0, 0, getWidth(), getHeight());
 	}
 
 	@Override

@@ -64,18 +64,17 @@ public class MillGameScene implements Lifecycle, MillGameUI {
 		boardUI.setSize(getWidth() * 3 / 4);
 		boardUI.setBgColor(BOARD_COLOR);
 		boardUI.setLineColor(LINE_COLOR);
-		boardUI.tf.centerX(getWidth());
-		boardUI.tf.y=(50);
+		boardUI.tf.centerHorizontally(0, getWidth());
+		boardUI.tf.y = (50);
 
 		stoneTemplate = new Stone(StoneColor.WHITE, boardUI.getStoneRadius());
 		stonesCounterFont = new Font(Font.MONOSPACED, Font.BOLD, 2 * boardUI.getStoneRadius());
-
 		messageArea = TextWidget.create().color(Color.BLUE)
 				.font(Assets.storeTrueTypeFont("message-font", "fonts/Cookie-Regular.ttf", Font.PLAIN, 36)).build();
 		messageArea.tf.setPosition(0, getHeight() - 90);
 
-		controller.assistant.tf.centerX(getWidth());
-		controller.assistant.tf.y=(getHeight() / 2 - 100);
+		controller.assistant.tf.centerHorizontally(0, getWidth());
+		controller.assistant.tf.y = (getHeight() / 2 - 100);
 	}
 
 	public Lifecycle getController() {
@@ -145,7 +144,7 @@ public class MillGameScene implements Lifecycle, MillGameUI {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		boardUI.draw(g);
 		controller.assistant.draw(g);
-		messageArea.tf.centerX(getWidth());
+		messageArea.tf.centerHorizontally(0, getWidth());
 		messageArea.draw(g);
 		MillGameState state = controller.getFsm().getState();
 		if (state == MillGameState.PLACING || state == MillGameState.PLACING_REMOVING) {
