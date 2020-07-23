@@ -253,7 +253,6 @@ public class MillGameController implements VisualController {
 	private void turnMovingTo(Player player) {
 		turn = player;
 		moveControl = new MoveController(turn, view, moveTimeSeconds);
-		moveControl.getFsm().getTracer().setLogger(LOGGER);
 		moveControl.getFsm().init();
 		view.showMessage("must_move", turn.name());
 	}
