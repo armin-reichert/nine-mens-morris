@@ -37,11 +37,6 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>de.amr.easy.game</groupId>
-			<artifactId>EasyGame</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
 			<groupId>de.amr.statemachine</groupId>
 			<artifactId>StateMachine</artifactId>
 			<version>1.0</version>
@@ -51,6 +46,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.amr.easy.game</groupId>
+			<artifactId>easy-game-framework</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
