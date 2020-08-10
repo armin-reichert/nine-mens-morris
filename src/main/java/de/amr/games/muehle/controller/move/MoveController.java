@@ -1,7 +1,7 @@
 package de.amr.games.muehle.controller.move;
 
-import static de.amr.easy.game.Application.LOGGER;
 import static de.amr.easy.game.Application.app;
+import static de.amr.easy.game.Application.loginfo;
 import static de.amr.games.muehle.controller.move.MoveEvent.GOT_MOVE_FROM_PLAYER;
 import static de.amr.games.muehle.controller.move.MoveState.ANIMATION;
 import static de.amr.games.muehle.controller.move.MoveState.COMPLETE;
@@ -70,7 +70,7 @@ public class MoveController {
 
 					.state(JUMPING)
 						.onEntry(() -> {
-							LOGGER.info(player.name() + ": "
+							loginfo(player.name() + ": "
 									+ Messages.text("jumping_from_to", move.from().get(), move.to().get()));
 						})
 
@@ -129,7 +129,7 @@ public class MoveController {
 				} else if (dir == Direction.WEST) {
 					stone.tf.setVelocity(-speed, 0);
 				}
-				LOGGER.info(player.name() + ": " + Messages.text("moving_from_to_towards", from, to, dir));
+				loginfo(player.name() + ": " + Messages.text("moving_from_to_towards", from, to, dir));
 			});
 		}
 	}
@@ -149,8 +149,7 @@ public class MoveController {
 			if (optStone.isPresent()) {
 				Stone stone = optStone.get();
 				float speed = stone.tf.getVelocity().length();
-				Ellipse2D stoneSpot = new Ellipse2D.Float(stone.tf.x - speed, stone.tf.y - speed, 2 * speed,
-						2 * speed);
+				Ellipse2D stoneSpot = new Ellipse2D.Float(stone.tf.x - speed, stone.tf.y - speed, 2 * speed, 2 * speed);
 				Vector2f toCenter = gameUI.getLocation(to);
 				return stoneSpot.contains(new Point2D.Float(toCenter.x, toCenter.y));
 			}
@@ -165,23 +164,23 @@ public class MoveController {
 		int from = move.from().get(), to = move.to().get();
 		Optional<Stone> optStone = gameUI.getStoneAt(from);
 		if (!optStone.isPresent()) {
-			LOGGER.info(Messages.text("stone_at_position_not_existing", from));
+			loginfo(Messages.text("stone_at_position_not_existing", from));
 			return false;
 		}
 		Stone stone = optStone.get();
 		if (stone.getColor() != player.color()) {
-			LOGGER.info(Messages.text("stone_at_position_wrong_color", from));
+			loginfo(Messages.text("stone_at_position_wrong_color", from));
 			return false;
 		}
 		if (!player.model().board.isEmptyPosition(to)) {
-			LOGGER.info(Messages.text("stone_at_position", to));
+			loginfo(Messages.text("stone_at_position", to));
 			return false;
 		}
 		if (player.canJump()) {
 			return true;
 		}
 		if (!areNeighbors(from, to)) {
-			LOGGER.info(Messages.text("not_neighbors", from, to));
+			loginfo(Messages.text("not_neighbors", from, to));
 			return false;
 		}
 		return true;

@@ -1,5 +1,6 @@
 package de.amr.games.muehle.view;
 
+import static de.amr.easy.game.Application.loginfo;
 import static de.amr.games.muehle.model.board.Board.neighbors;
 import static de.amr.games.muehle.model.board.Board.positions;
 
@@ -10,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import de.amr.easy.game.Application;
 import de.amr.easy.game.assets.Assets;
 import de.amr.easy.game.assets.SoundClip;
 import de.amr.easy.game.controller.Lifecycle;
@@ -59,8 +59,8 @@ public class Assistant extends Entity implements Lifecycle, View {
 		this.board = control.model.board;
 		this.helpLevel = HelpLevel.OFF;
 		alien = Assets.image("images/alien.png").getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
-		tf.width =(alien.getWidth(null));
-		tf.height =(alien.getHeight(null));
+		tf.width = (alien.getWidth(null));
+		tf.height = (alien.getHeight(null));
 	}
 
 	public void setView(MillGameUI view) {
@@ -74,10 +74,10 @@ public class Assistant extends Entity implements Lifecycle, View {
 	public void setHelpLevel(HelpLevel level) {
 		helpLevel = level;
 		if (helpLevel == HelpLevel.OFF) {
-			Application.LOGGER.info(Messages.text("assistant_off"));
+			loginfo(Messages.text("assistant_off"));
 		} else {
 			tellYoFine();
-			Application.LOGGER.info(Messages.text("assistant_on"));
+			loginfo(Messages.text("assistant_on"));
 		}
 	}
 

@@ -1,5 +1,6 @@
 package de.amr.games.muehle.test;
 
+import static de.amr.easy.game.Application.loginfo;
 import static de.amr.games.muehle.model.board.Board.positions;
 import static de.amr.games.muehle.model.board.StoneColor.BLACK;
 import static de.amr.games.muehle.model.board.StoneColor.WHITE;
@@ -9,7 +10,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.stream.IntStream;
 
-import de.amr.easy.game.Application;
 import de.amr.easy.game.controller.Lifecycle;
 import de.amr.easy.game.input.Mouse;
 import de.amr.easy.game.view.View;
@@ -74,15 +74,15 @@ public class TestScene implements Lifecycle, View {
 	}
 
 	private void printBoardInfo() {
-		Application.LOGGER.info("Positions opening two white mills: " + toCSV(board.positionsOpeningTwoMills(WHITE)));
-		Application.LOGGER.info("Positions opening two black mills: " + toCSV(board.positionsOpeningTwoMills(BLACK)));
-		Application.LOGGER.info("Positions opening one white mill: " + toCSV(board.positionsOpeningMill(WHITE)));
-		Application.LOGGER.info("Positions opening one black mill: " + toCSV(board.positionsOpeningMill(BLACK)));
-		Application.LOGGER.info("Positions closing white mill: " + toCSV(board.positionsClosingMill(WHITE)));
-		Application.LOGGER.info("Positions closing black mill: " + toCSV(board.positionsClosingMill(BLACK)));
-		Application.LOGGER.info("Positions from where can close white mill: "
+		loginfo("Positions opening two white mills: " + toCSV(board.positionsOpeningTwoMills(WHITE)));
+		loginfo("Positions opening two black mills: " + toCSV(board.positionsOpeningTwoMills(BLACK)));
+		loginfo("Positions opening one white mill: " + toCSV(board.positionsOpeningMill(WHITE)));
+		loginfo("Positions opening one black mill: " + toCSV(board.positionsOpeningMill(BLACK)));
+		loginfo("Positions closing white mill: " + toCSV(board.positionsClosingMill(WHITE)));
+		loginfo("Positions closing black mill: " + toCSV(board.positionsClosingMill(BLACK)));
+		loginfo("Positions from where can close white mill: "
 				+ toCSV(positions().filter(p -> board.canCloseMillMovingFrom(p, WHITE))));
-		Application.LOGGER.info("Positions from where can close black mill: "
+		loginfo("Positions from where can close black mill: "
 				+ toCSV(positions().filter(p -> board.canCloseMillMovingFrom(p, BLACK))));
 	}
 

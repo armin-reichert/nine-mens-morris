@@ -1,6 +1,6 @@
 package de.amr.games.muehle.controller.game;
 
-import static de.amr.easy.game.Application.LOGGER;
+import static de.amr.easy.game.Application.loginfo;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_PLACED;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_PLACED_IN_MILL;
 import static de.amr.games.muehle.controller.game.MillGameEvent.STONE_REMOVED;
@@ -299,7 +299,7 @@ public class MillGameController implements VisualController {
 					fsm.enqueue(STONE_PLACED);
 				}
 			} else {
-				LOGGER.info(Messages.text("stone_at_position", placedAt));
+				loginfo(Messages.text("stone_at_position", placedAt));
 			}
 		});
 	}
@@ -308,16 +308,16 @@ public class MillGameController implements VisualController {
 		turn.supplyRemovalPosition().ifPresent(p -> {
 			StoneColor colorToRemove = playerNotInTurn().color();
 			if (model.board.isEmptyPosition(p)) {
-				LOGGER.info(Messages.text("stone_at_position_not_existing", p));
+				loginfo(Messages.text("stone_at_position_not_existing", p));
 			} else if (model.board.getStoneAt(p).get() != colorToRemove) {
-				LOGGER.info(Messages.text("stone_at_position_wrong_color", p));
+				loginfo(Messages.text("stone_at_position_wrong_color", p));
 			} else if (model.board.inMill(p, colorToRemove)
 					&& !model.board.allStonesInMills(colorToRemove)) {
-				LOGGER.info(Messages.text("stone_cannot_be_removed_from_mill"));
+				loginfo(Messages.text("stone_cannot_be_removed_from_mill"));
 			} else {
 				view.removeStoneAt(p);
 				fsm.enqueue(STONE_REMOVED);
-				LOGGER.info(Messages.text("removed_stone_at_position", turn.name(), p));
+				loginfo(Messages.text("removed_stone_at_position", turn.name(), p));
 			}
 		});
 	}
